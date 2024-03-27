@@ -60,14 +60,34 @@ void *lastList(List *list) {
     return list->current->data;
 }
 
-void pushFront(List *list, void *data) {}
+void pushCurrent(List *list, void *data) {
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL) {return NULL;}
+    newNode->data = data;
+    newNode->next = list->current->next;
+    newNode->prev = list->current;
+    if (list->current->next != NULL) {
+        list->current->next->prev = newNode;
+    }
+    list->current->next = newNode;
+    list->current = newNode;
+    if (list->tail == list->current->prev) {
+        list->tail = newNode;
+    }
+}
+
+void pushFront(List *list, void *data) {
+    list->current = list->head;
+    pushCurrent(list, data);
+    if (list->head == NULL) {
+        list->head = list->current;
+    }
+}
 
 void pushBack(List *list, void *data) {
   list->current = list->tail;
   pushCurrent(list, data);
 }
-
-void pushCurrent(List *list, void *data) {}
 
 void *popFront(List *list) {
   list->current = list->head;
