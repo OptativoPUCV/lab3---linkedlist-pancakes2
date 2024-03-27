@@ -62,7 +62,6 @@ void *lastList(List *list) {
 
 void pushCurrent(List *list, void *data) {
     Node *newNode = malloc(sizeof(Node));
-    if (newNode == NULL) {return NULL;}
     newNode->data = data;
     newNode->next = list->current->next;
     newNode->prev = list->current;
