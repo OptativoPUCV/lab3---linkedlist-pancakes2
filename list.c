@@ -36,22 +36,23 @@ List * createList() {
   return list;
 }
 
-void * firstList(List * list) {
-  if (list->head == NULL) return NULL;
-  list->current = list->head;
-  return list->current->data;
+
+void *firstList(List *list) {
+    if (list->head == NULL) return NULL;
+    list->current = list->head;
+    return list->current->data;
 }
 
-void * nextList(List * list) {
-  return NULL;
+void *nextList(List *list) {
+    if (list->current->next == NULL) return NULL;
+    list->current = list->current->next;
+    return list->current->data;
 }
 
-void * lastList(List * list) {
-  return NULL;
-}
-
-void * prevList(List * list) {
-  return NULL;
+void *prevList(List *list) {
+    if (list->current->prev == NULL) return NULL;
+    list->current = list->current->prev;
+    return list->current->data;
 }
 
 void pushFront(List * list, void * data) {
