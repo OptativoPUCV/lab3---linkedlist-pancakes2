@@ -37,31 +37,28 @@ List *createList() {
 }
 
 void *firstList(List *list) {
-  if (list->head == NULL)
-    return NULL;
-  list->current = list->head;
-  return list->current->data;
+    if (list->head == NULL) {return NULL;}
+    list->current = list->head;
+    return list->current->data;
 }
 
 void *nextList(List *list) {
-  if (list->current) {
+    if (list->current->next == NULL) {return NULL;}
     list->current = list->current->next;
     return list->current->data;
-  } else {
-    return NULL;
-  }
 }
 
 void *prevList(List *list) {
-  if (list->current->prev == NULL)
-    return NULL;
-  if (list->current == NULL)
-    return NULL;
-  list->current = list->current->prev;
-  return list->current->data;
+    if (list->current->prev == NULL) {return NULL;}
+    list->current = list->current->prev;
+    return list->current->data;
 }
 
-void *lastList(List *list) { return NULL; }
+void *lastList(List *list) {
+    if (list->head == NULL) {return NULL;}
+    list->current = list->tail;
+    return list->current->data;
+}
 
 void pushFront(List *list, void *data) {}
 
