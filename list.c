@@ -63,34 +63,43 @@ void *lastList(List *list) {
 void pushCurrent(List *list, void *data) {
   Node *newNode = malloc(sizeof(Node));
   if (newNode != NULL) {
-      newNode->data = data;
-      if (list->current != NULL) {
-          newNode->next = list->current->next;
-          newNode->prev = list->current;
-          if (list->current->next != NULL) {
-              list->current->next->prev = newNode;
-          }
-          list->current->next = newNode;
-          if (list->tail == list->current) {
-              list->tail = newNode;
-          }
-      } else {
-          newNode->next = NULL;
-          newNode->prev = NULL;
-          list->head = newNode;
-          list->tail = newNode;
+    newNode->data = data;
+    if (list->current != NULL) {
+      newNode->next = list->current->next;
+      newNode->prev = list->current;
+      if (list->current->next != NULL) {
+        list->current->next->prev = newNode;
       }
-      list->current = newNode;
+      list->current->next = newNode;
+      if (list->tail == list->current) {
+        list->tail = newNode;
+      }
+    } else {
+      newNode->next = NULL;
+      newNode->prev = NULL;
+      list->head = newNode;
+      list->tail = newNode;
+    }
+    list->current = newNode;
   }
 }
 
 
 void pushFront(List *list, void *data) {
-    list->current = list->head;
-    pushCurrent(list, data);
-    if (list->head == NULL) {
-        list->head = list->current;
+  Node *newNode = malloc(sizeof(Node));
+  if (newNode != NULL) {
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = list->head;
+    if (list->head != NULL) {
+      list->head->prev = newNode;
     }
+    list->head = newNode;
+    if (list->tail == NULL) {
+      list->tail = newNode;
+    }
+    list->current = newNode;
+  }
 }
 
 void pushBack(List *list, void *data) {
