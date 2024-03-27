@@ -43,10 +43,13 @@ void *firstList(List *list) {
 }
 
 void *nextList(List *list) {
-    if (list->current->next == NULL) return NULL;
-    if (list->current == NULL) return NULL;
-    list->current = list->current->next;
-    return list->current->data;
+    if (list->current->next == NULL) {
+        list->current = list->current->next;
+        return list->current->data;
+    } else {
+      return NULL;
+    }
+
 }
 
 void *prevList(List *list) {
